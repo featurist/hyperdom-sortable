@@ -1,10 +1,21 @@
 var plastiq = require('plastiq');
 var h = plastiq.html;
-var $ = require('jquery');
-window.$ = $;
 
 function listElement(element) {
   return element;
+}
+
+function offset(element) {
+  var offset = {top: element.offsetTop, left: element.offsetLeft};
+  var parent = element.offsetParent;
+
+  while (parent != null) {
+    offset.left += parent.offsetLeft;
+    offset.top  += parent.offsetTop;
+    parent = parent.offsetParent;
+  }
+
+  return offset;
 }
 
 module.exports = function (selector, items, map) {
@@ -65,7 +76,7 @@ module.exports = function (selector, items, map) {
           if(target == self.dragged) return;
           self.over = target;
           // Inside the dragOver method
-          var relY = e.clientY + window.scrollY - $(self.over).offset().top;
+          var relY = e.clientY + window.scrollY - offset(self.over).top;
           var height = self.over.offsetHeight / 2;
 
           if(relY > height) {
@@ -86,9 +97,10 @@ module.exports = function (selector, items, map) {
           e.dataTransfer.effectAllowed = 'move';
           self.placeholder = document.createElement(self.dragged.tagName);
           self.placeholder.className = "placeholder";
-          $(self.placeholder).css('display', $(self.dragged).css('display'));
-          $(self.placeholder).height($(self.dragged).height());
-          $(self.placeholder).height($(self.dragged).height());
+          self.placeholder.style.padding = '0';
+          self.placeholder.style.border = 'none';
+          self.placeholder.style.display = self.dragged.style.display;
+          self.placeholder.style.height = String(self.dragged.offsetHeight) + 'px';
           
           // Firefox requires dataTransfer data to be set
           e.dataTransfer.setData("text/html", currentTarget);
@@ -103,7 +115,7 @@ module.exports = function (selector, items, map) {
         });
 
         list.addEventListener('dragend', function (e) {
-          self.dragged.style.display = "block";
+          self.dragged.style.display = '';
           self.dragged.parentNode.removeChild(self.placeholder);
 
           // Update data
