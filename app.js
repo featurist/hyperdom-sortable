@@ -7,25 +7,32 @@ function render() {
     h('button', {onclick: function (ev) {ev.preventDefault();}}, 'refresh'),
     h('h1', 'sortable'),
     h('pre code', JSON.stringify(model.items)),
-    sortable('ul', model.cars, function (car) {
-      return h('li', car);
-    }),
-    sortable('ul', model.bigItems, function (bigItem) {
-      return h('li',
-        h('h3', bigItem.name),
-        sortable('ul', bigItem.items, function (item) {
-          if (bigItem.name == 'Colours') {
-            return h('li', {style: {'background-color': item}}, item);
-          } else {
-            return h('li', item);
-          }
-        })
-      );
-    }),
-    h('ul', model.colours.map(function (item) {
-      return h('li', {style: {'background-color': item}}, item);
-    }))
+    renderExample(function () {
+      return renderHierarchy(model.bigItems);
+    })
   );
+}
+
+function renderExample(fn) {
+  return h('.example',
+    h('.left', fn()),
+    h('.right', fn())
+  );
+}
+
+function renderHierarchy(hierarchy) {
+  return sortable('ul', hierarchy, function (item) {
+    return h('li',
+      h('h3', item.name),
+      sortable('ul', item.items, function (subitem) {
+        if (item.name == 'Colours') {
+          return h('li', {style: {'background-color': subitem}}, subitem);
+        } else {
+          return h('li', subitem);
+        }
+      })
+    );
+  });
 }
 
 var colours = [
