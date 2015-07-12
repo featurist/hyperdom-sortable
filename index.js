@@ -1,8 +1,22 @@
 var plastiq = require('plastiq');
 var h = plastiq.html;
 
-module.exports = function (selector, items, map) {
+module.exports = function (selector_, options_, items_, map_) {
   var refresh = h.refresh;
+
+  var selector, options, items, map;
+  
+  if (map_) {
+    selector = selector_;
+    options = options_;
+    items = items_;
+    map = map_;
+  } else {
+    selector = selector_;
+    options = {};
+    items = options_;
+    map = items_;
+  }
 
   return h.component(
     {
@@ -74,7 +88,7 @@ module.exports = function (selector, items, map) {
 
         listElement.addEventListener('dragend', function (e) {
           self.dragged.style.display = '';
-          self.dragged.parentNode.removeChild(self.placeholder);
+          listElement.removeChild(self.placeholder);
           delete self.placeholder;
 
           // Update data
@@ -98,7 +112,7 @@ module.exports = function (selector, items, map) {
         });
       }
     },
-    h(selector, items.map(function (item, index) {
+    h(selector, options, items.map(function (item, index) {
       var child = map(item);
 
       if (!child.properties.dataset) {
