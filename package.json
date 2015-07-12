@@ -1,0 +1,16 @@
+{
+  "name": "plastiq-sortable",
+  "version": "1.0.0",
+  "description": "sortable lists for plastiq",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "plastiq",
+    "sortable",
+    "draggable"
+  ],
+  "author": "Tim Macfarlane <timmacfarlane@gmail.com>",
+  "license": "MIT"
+}
