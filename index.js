@@ -18,6 +18,10 @@ module.exports = function (selector_, options_, items_, map_) {
     map = items_;
   }
 
+  if (options.moveItem) {
+    options.moveItem = h.refreshify(options.moveItem);
+  }
+
   return h.component(
     {
       items: items,
@@ -30,8 +34,19 @@ module.exports = function (selector_, options_, items_, map_) {
       },
 
       moveItem: function(from, to) {
-        this.items.splice(to, 0, this.items.splice(from, 1)[0]);
-        refresh();
+        if (options.moveItem) {
+          options.moveItem(from, to);
+        } else {
+          var item = this.items[from];
+
+          this.items.splice(to, 0, this.items.splice(from, 1)[0]);
+
+          if (options.onitemmoved) {
+            options.onitemmoved(item, from, to);
+          }
+
+          refresh();
+        }
       },
 
       setup: function (listElement) {
@@ -103,7 +118,9 @@ module.exports = function (selector_, options_, items_, map_) {
             if(self.nodePlacement == "after") {
               to++;
             }
-            self.moveItem(from, to);
+            if (from != to) {
+              self.moveItem(from, to);
+            }
             delete self.dragged;
             delete self.over;
             delete self.nodePlacement;
