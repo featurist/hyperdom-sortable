@@ -71,10 +71,10 @@ module.exports = function (selector_, options_, items_, map_) {
         listElement.addEventListener('dragstart', function (e) {
           var currentTarget = itemElementContaining(e.target, listElement);
           self.dragged = currentTarget;
-          e.dataTransfer.effectAllowed = 'move';
           self.placeholder = createPlaceholder(self.dragged);
           
           // Firefox requires dataTransfer data to be set
+          e.dataTransfer.effectAllowed = 'move';
           e.dataTransfer.setData("text/html", currentTarget);
           e.stopPropagation();
         });
