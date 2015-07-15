@@ -12,5 +12,18 @@
     "draggable"
   ],
   "author": "Tim Macfarlane <timmacfarlane@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "peerDependencies": {
+    "plastiq": "^1.18.0"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/featurist/plastiq-sortable.git"
+  },
+  "bugs": {
+    "url": "https://github.com/featurist/plastiq-sortable/issues"
+  },
+  "homepage": "https://github.com/featurist/plastiq-sortable"
 }
