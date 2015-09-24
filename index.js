@@ -171,7 +171,8 @@ function createPlaceholder(original) {
   placeholder.className = "placeholder";
   placeholder.style.padding = '0';
   placeholder.style.border = 'none';
-  placeholder.style.display = original.style.display;
+  var style = getComputedStyle(original);
+  placeholder.style.display = style.display;
   placeholder.style.height = String(original.offsetHeight) + 'px';
   return placeholder;
 }
