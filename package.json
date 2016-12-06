@@ -1,29 +1,29 @@
 {
-  "name": "plastiq-sortable",
+  "name": "hyperdom-sortable",
   "version": "1.2.0",
-  "description": "sortable lists for plastiq",
+  "description": "sortable lists for hyperdom",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "plastiq",
+    "hyperdom",
     "sortable",
     "draggable"
   ],
   "author": "Tim Macfarlane <timmacfarlane@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "plastiq": "^1.18.0"
+    "hyperdom": "*"
   },
   "dependencies": {},
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/featurist/plastiq-sortable.git"
+    "url": "https://github.com/featurist/hyperdom-sortable.git"
   },
   "bugs": {
-    "url": "https://github.com/featurist/plastiq-sortable/issues"
+    "url": "https://github.com/featurist/hyperdom-sortable/issues"
   },
-  "homepage": "https://github.com/featurist/plastiq-sortable"
+  "homepage": "https://github.com/featurist/hyperdom-sortable"
 }

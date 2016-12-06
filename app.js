@@ -1,5 +1,5 @@
-var plastiq = require('plastiq');
-var h = plastiq.html;
+var hyperdom = require('hyperdom');
+var h = hyperdom.html;
 var sortable = require('.');
 
 function render() {
@@ -79,4 +79,4 @@ var model = {
   ]
 };
 
-plastiq.append(document.body, render);
+hyperdom.append(document.body, render);
